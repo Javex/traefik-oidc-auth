@@ -112,6 +112,9 @@ func (toa *TraefikOidcAuth) ServeHTTP(rw http.ResponseWriter, req *http.Request)
 							break
 						}
 					}
+					if claimMap.Claim == "token" {
+						req.Header.Set(claimMap.Header, fmt.Sprintf("Bearer %s", updatedSession.AccessToken))
+					}
 				}
 			}
 
